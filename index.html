@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VeyaCars | Platinum Login</title>
+    <title>veyacars | platinum</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #fbfbfd; font-family: -apple-system, system-ui, sans-serif; }
+        body { background-color: #fbfbfd; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         .apple-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); }
     </style>
 </head>
@@ -14,16 +14,16 @@
 
     <div class="w-full max-w-md p-10 apple-card rounded-[40px] shadow-2xl">
         <div class="text-center mb-12">
-            <h1 class="text-5xl font-bold tracking-tighter text-gray-900 mb-2 italic">Veya<span class="font-light not-italic text-gray-400">Cars</span></h1>
-            <div class="inline-block px-3 py-1 bg-black text-[10px] text-white font-bold rounded-full tracking-[3px] uppercase">Platinum Access</div>
+            <h1 class="text-5xl font-bold tracking-tighter text-gray-900 mb-2 italic">veya<span class="font-light not-italic text-gray-400">cars</span></h1>
+            <div class="inline-block px-3 py-1 bg-black text-[10px] text-white font-bold rounded-full tracking-[3px] uppercase">platinum access</div>
         </div>
 
         <div class="space-y-5">
-            <input type="email" id="email" placeholder="E-posta" class="w-full px-6 py-4 rounded-2xl bg-white border border-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all outline-none">
-            <input type="password" id="password" placeholder="Şifre" class="w-full px-6 py-4 rounded-2xl bg-white border border-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all outline-none">
+            <input type="email" id="email" placeholder="e-posta" class="w-full px-6 py-4 rounded-2xl bg-white border border-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all outline-none">
+            <input type="password" id="password" placeholder="şifre" class="w-full px-6 py-4 rounded-2xl bg-white border border-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all outline-none">
             
             <button id="loginBtn" class="w-full py-4 bg-black text-white rounded-2xl font-semibold hover:bg-gray-800 transition-transform active:scale-95 shadow-lg shadow-gray-200">
-                Oturum Aç
+                oturum aç
             </button>
         </div>
     </div>
@@ -32,7 +32,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // Senin verdiğin güncel anahtarlar
         const firebaseConfig = {
             apiKey: "AIzaSyBAM59ERYqJ26_eT8U0VLAR9QC_tZCkewk",
             authDomain: "studio-9809453507-fbf93.firebaseapp.com",
@@ -49,20 +48,5 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            if(!email || !password) {
-                alert("Lütfen tüm alanları doldurun.");
-                return;
-            }
-
             try {
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                alert("Giriş Başarılı! VeyaCars dünyasına hoş geldin.");
-                // Başarılı girişten sonra yönlendirme:
-                // window.location.href = "panel.html"; 
-            } catch (error) {
-                alert("Giriş Hatası: " + error.message);
-            }
-        });
-    </script>
-</body>
-</html>
+                await signInWithEmailAndPassword(auth
