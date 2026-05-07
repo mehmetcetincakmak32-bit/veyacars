@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeyaCars | Platinum Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #f5f5f7; font-family: -apple-system, system-ui, sans-serif; }
+        .nav-blur { background: rgba(255, 255, 255, 0.7); backdrop-filter: saturate(180%) blur(20px); }
+        .platinum-card { background: linear-gradient(135deg, #e5e7eb 0%, #ffffff 100%); border: 1px solid rgba(255,255,255,0.8); }
+        .badge-platinum { background: linear-gradient(90deg, #000 0%, #444 100%); }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold italic tracking-tighter">Veya<span class="font-light not-italic text-gray-400">Cars</span></h1>
+            <div class="flex items-center gap-4">
+                <span id="userName" class="text-sm font-medium text-gray-600 italic">Yükleniyor...</span>
+                <button onclick="logout()" class="text-xs font-semibold text-red-500 hover:text-red-700">Çıkış Yap</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="md:col-span-1 p-8 rounded-[32px] shadow-sm platinum-card">
+                <div class="badge-platinum text-[10px] text-white px-3 py-1 rounded-full inline-block font-bold tracking-widest mb-4 uppercase">Platinum Member</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-1" id="profileName">Mehmet</h2>
+                <p class="text-gray-500 text-sm italic">Otoyolun Lideri</p>
+                
+                <div class="mt-10 space-y-4 pt-6 border-t border-gray-200">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Üyelik Tipi</span>
+                        <span class="font-semibold">Bireysel</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Durum</span>
+                        <span class="text-green-500 font-semibold">Aktif</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white p-8 rounded-[32px] shadow-sm border border-gray-100">
+                <h3 class="text-xl font-bold mb-6">Son İşlemler</h3>
+                <div class="flex flex-col items-center justify-center py-20 text-gray-300">
+                    <svg class="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    <p class="text-sm">Henüz bir araç analizi bulunmuyor.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBAM59ERYqJ26_eT8U0VLAR9QC_tZCkewk",
+            authDomain: "studio-9809453507-fbf93.firebaseapp.com",
+            projectId: "studio-9809453507-fbf93",
+            storageBucket: "studio-9809453507-fbf93.firebasestorage.app",
+            messagingSenderId: "853925376370",
+            appId: "1:853925376370:web:2c1506c140591b472aedeb"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Oturum kontrolü
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('userName').innerText = user.email;
+                document.getElementById('profileName').innerText = user.email.split('@')[0];
+            } else {
+                window.location.href = "index.html"; // Giriş yapmamışsa geri gönder
+            }
+        });
+
+        window.logout = () => {
+            signOut(auth).then(() => {
+                window.location.href = "index.html";
+            });
+        };
+    </script>
+</body>
+</html>
+
